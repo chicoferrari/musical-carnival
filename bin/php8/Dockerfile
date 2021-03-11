@@ -5,3 +5,6 @@ RUN docker-php-ext-install pdo_mysql bcmath
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+# Install Bash
+RUN apk --no-cache add bash
