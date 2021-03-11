@@ -14,7 +14,17 @@ services:
       - phpmyadmindata:/var/www/phpmyadmin
     depends_on:
       - backend
+      - frontend
       - phpmyadmin
+
+  frontend:
+    build:
+      context: ./bin/node
+    working_dir: /var/www/frontend
+    volumes:
+      - ./src/frontend:/var/www/frontend
+    depends_on:
+      - backend
 
   backend:
     build:
