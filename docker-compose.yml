@@ -9,20 +9,20 @@ services:
     ports:
       - '80:80'
     volumes:
-      - ./src:/var/www/php
+      - ./src/backend:/var/www/backend
       - ./.docker/nginx/conf.d:/etc/nginx/conf.d
       - phpmyadmindata:/var/www/phpmyadmin
     depends_on:
-      - php
+      - backend
       - phpmyadmin
 
-  php:
+  backend:
     build:
       context: ./bin/php8
     container_name: 'docker-lemp-php'
-    working_dir: /var/www/php
+    working_dir: /var/www/backend
     volumes:
-      - ./src:/var/www/php
+      - ./src/backend:/var/www/backend
     depends_on:
       - mysql
 
