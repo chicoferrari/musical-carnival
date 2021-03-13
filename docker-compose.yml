@@ -8,10 +8,16 @@ services:
     container_name: 'docker-lemp-nginx'
     ports:
       - '80:80'
+      - '443:443'
+    networks:
+      default:
+        aliases:
+          - frontend.lemp.test
     volumes:
       - ./src/backend:/var/www/backend
       - ./.docker/nginx/conf.d:/etc/nginx/conf.d
       - phpmyadmindata:/var/www/phpmyadmin
+      - ./.docker/nginx/certs:/etc/nginx/certs
     depends_on:
       - backend
       - frontend
