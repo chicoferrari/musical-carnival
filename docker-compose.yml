@@ -43,6 +43,7 @@ services:
       - ./.docker/backend/init:/opt/files/init
     depends_on:
       - mysql
+      - redis
 
   mysql:
     build:
@@ -66,6 +67,15 @@ services:
     depends_on:
       - mysql
 
+  redis:
+    build:
+      context: ./bin/redis
+    container_name: 'docker-lemp-redis'
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redisdata:/data
+
 volumes:
   mysqldata:
   phpmyadmindata:
+  redisdata:
